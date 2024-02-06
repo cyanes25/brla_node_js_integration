@@ -1,3 +1,21 @@
+function readPrivateKey() {
+    return fs.readFileSync('private_key.pem', 'utf8');
+  }
+  
+  // Função para ler chave pública
+  function readPublicKey() {
+    return fs.readFileSync('public_key.pem', 'utf8');
+  }
+  
+  // Função para gerar a assinatura
+  function signMessage(privateKey, message) {
+    const sign = crypto.createSign('RSA-SHA256');
+    sign.update(message);
+    return sign.sign(privateKey, 'base64');
+  }
+
+  
+
 async function fastQuote(amount, chain, outputCoin, fixOutput) {
     const timestamp = Date.now().toString();
     const httpMethod='GET'
